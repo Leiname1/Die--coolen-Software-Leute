@@ -28,10 +28,10 @@ void compass() {
 
   drehung = (p * winkel) - (d * rotationSpeed);
 
-  //Serial.println(rotationSpeed);
-  //delay(10);
+  //Serial.println(drehung);
+  //delay(100);
   alpha = (winkel / 180) * PI;
 
-  rot = drehung / 0.6;
+  rot = drehung / 0.60;
 
 }

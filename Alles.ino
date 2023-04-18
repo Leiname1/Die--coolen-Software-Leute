@@ -130,14 +130,14 @@ void setup() {
 
 
 void loop() {
-if (analogRead(LA17) < 5){
+if (!pixy.ccc.getBlocks()){
+  compass();
+  }
+else if (pixy.ccc.getBlocks()){
   Pixy();
   }
-else if (analogRead(LA17) > 5){
   infrarotlesen();
   infrarotverarbeiten();
-  }
-  compass();
   Motor();
 }
 

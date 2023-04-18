@@ -89,7 +89,7 @@ void infrarotverarbeiten() {
       case 15: richtung = 247.5; break;  
     }
 
-    geschw = 7;
+    geschw = 5;
   }                         
   else {
     SEbest = -1;
