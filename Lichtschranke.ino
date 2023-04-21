@@ -1,10 +1,11 @@
-int WertLichtschranke;
+void schuss(){
+  
+  Motor_Wert[Dribbler] = 255;
+  Motor();
+  delay(100);
+  Motor_Wert[Dribbler] = 0;
+  Motor();
+  delay(1000);
+  
 
-void Lichtschranke(){
-//Serial.print(" Wert ");
-//Serial.println(analogRead(LA17));
-//delay(100); 
-
-  //Serial.println(analogRead(LA17));
-  //delay(10);
-}  
+}

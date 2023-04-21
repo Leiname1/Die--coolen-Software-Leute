@@ -78,7 +78,7 @@ int Mot_Pin_PWM[AnzahlMotoren] = {5, 2, 29, 8};
 
 int Motor_Wert[AnzahlMotoren];
 
-constexpr byte mH = 2, mR = 0, mL = 3;
+constexpr byte mH = 2, mR = 0, mL = 3, Dribbler = 1;
 
 //Multiplexa
 constexpr int MuxSig0 = 38;
@@ -95,13 +95,13 @@ double richtung , geschw , drehung;
 
 void setup() {
   Serial.begin(115200);
-  Serial.print("Starting...\n");
+  /*Serial.print("Starting...\n");
   if (!gyro.begin()) {       //wird der gyro nicht erkannt: Programm stoppt
     Serial.print("Kein Gyro erkannt");
     abort();
-  }
-  gyro.begin(8);
-  pixy.init();
+  }*/
+  //gyro.begin(8);
+ // pixy.init();
   Wire.begin();
 
   pinMode(Mot_Pin_FW[0], OUTPUT);
@@ -130,15 +130,16 @@ void setup() {
 
 
 void loop() {
-if (!pixy.ccc.getBlocks()){
+/*if (!pixy.ccc.getBlocks()){
   compass();
   }
-else if (pixy.ccc.getBlocks()){
+  if (pixy.ccc.getBlocks()){
   Pixy();
-  }
+  } 
   infrarotlesen();
-  infrarotverarbeiten();
-  Motor();
+  infrarotverarbeiten();*/
+  schuss();
+ // Motor();
 }
 
 
@@ -146,7 +147,7 @@ else if (pixy.ccc.getBlocks()){
 
 
 void Motor() {
-  double bg = (richtung / 180.0) * PI;
+ /* double bg = (richtung / 180.0) * PI;
   double x = cos(bg) * -255, y = sin(bg) * 255;
 
 
@@ -154,8 +155,7 @@ void Motor() {
   Motor_Wert[mL] = ((x / 3) + (y / sqrt(3))) * 0.075 * geschw * 1 + drehung; //0.1125
   Motor_Wert[mH] = -((((2 * x) / 3) * 0.075) * geschw * 1 - drehung);
 
-
-
+*/
   if (Motor_Wert[0] > 0) {
     digitalWrite(Mot_Pin_FW[0], LOW);
     digitalWrite(Mot_Pin_RW[0], HIGH);
@@ -182,8 +182,8 @@ void Motor() {
     analogWrite(Mot_Pin_PWM[1], abs(Motor_Wert[1]));
   }
   if (Motor_Wert[1] == 0) {
-    digitalWrite(Mot_Pin_FW[1], HIGH);
-    digitalWrite(Mot_Pin_RW[1], HIGH);
+    digitalWrite(Mot_Pin_FW[1], LOW);
+    digitalWrite(Mot_Pin_RW[1], LOW);
     analogWrite(Mot_Pin_PWM[1], 255);
   }
   if (Motor_Wert[2] > 0) {
@@ -202,18 +202,18 @@ void Motor() {
     analogWrite(Mot_Pin_PWM[2], 255);
   }
   if (Motor_Wert[3] > 0) {
-    digitalWrite(Mot_Pin_FW[3], LOW);
-    digitalWrite(Mot_Pin_RW[3], HIGH);
-    analogWrite(Mot_Pin_PWM[3], abs(Motor_Wert[3]));
-  }
-  if (Motor_Wert[3] < 0) {
     digitalWrite(Mot_Pin_FW[3], HIGH);
     digitalWrite(Mot_Pin_RW[3], LOW);
     analogWrite(Mot_Pin_PWM[3], abs(Motor_Wert[3]));
   }
-  if (Motor_Wert[3] == 0) {
-    digitalWrite(Mot_Pin_FW[3], HIGH);
+  if (Motor_Wert[3] < 0) {
+    digitalWrite(Mot_Pin_FW[3], LOW);
     digitalWrite(Mot_Pin_RW[3], HIGH);
+    analogWrite(Mot_Pin_PWM[3], abs(Motor_Wert[3]));
+  }
+  if (Motor_Wert[3] == 0) {
+    digitalWrite(Mot_Pin_FW[3], LOW);
+    digitalWrite(Mot_Pin_RW[3], LOW);
     analogWrite(Mot_Pin_PWM[3], 255);
   }
 }

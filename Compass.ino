@@ -23,8 +23,8 @@ void compass() {
     winkel = winkel + 360;
 
   }
-  double p = -1.2;//-0.5
-  double d = -4.9;//-1.5
+  double p = -0.6;//-1.2
+  double d = -2;//-4.9
 
   drehung = (p * winkel) - (d * rotationSpeed);
 

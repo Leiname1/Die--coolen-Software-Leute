@@ -21,15 +21,15 @@ void Pixy()
   //Serial.println(TorRichtung);
   //delay(100);    
   
-  if(TorRichtung <= 80){
-    drehung = -5;
+  if(TorRichtung <= 75){
+    drehung = -20;
   }
 
-  if (TorRichtung >= 100){
-    drehung = 5;
+  if (TorRichtung >= 105){
+    drehung = 20;
   }
 
-  if (TorRichtung > 80 && TorRichtung < 100){
+  if (TorRichtung > 75 && TorRichtung < 105){
     drehung = 0;
   }
   
