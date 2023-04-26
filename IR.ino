@@ -43,33 +43,34 @@ void infrarotverarbeiten() {
       SEbest = x;
     }
   }
-  if (IRbest <= 500) {
+  if (IRbest <= 540) {
     switch (SEbest) {
       case 0: richtung = 180; break;
       case 1: richtung = 202.5; break;
       case 2: richtung = 225; break;
       case 3: richtung = 247.5; break;                                                                  //HINTEN = 270
-                                                                           //VORNE = 90
-                                                                           //RECHTS = 180
-                                                                           //LINKS = 0/360
+      //VORNE = 90
+      //RECHTS = 180
+      //LINKS = 0/360
       case 4: richtung = 270; break;
       case 5: richtung = 315; break;
       case 6: richtung = 337.5; break;
-      case 7: richtung = 78.25; break;
+      case 7: richtung = 75; break;
       case 8: richtung = 90; break;
-      case 9: richtung = 111.25; break;                                     
+      case 9: richtung = 105; break;
       case 10: richtung = 202.5; break;
-      case 11: richtung = 225; break;                                   
+      case 11: richtung = 225; break;
       case 12: richtung = 270; break;
       case 13: richtung = 292.5; break;
       case 14: richtung = 315; break;
       case 15: richtung = 337.5; break;
     }
+   
 
     geschw = 6;
   }
 
-  else if (IRbest > 500 && IRbest < 1000) {
+  else if (IRbest > 540 && IRbest < 1000) {
     switch (SEbest) {
       case 0: richtung = 270; break;
       case 1: richtung = 247.5; break;
@@ -86,11 +87,15 @@ void infrarotverarbeiten() {
       case 12: richtung = 180; break;
       case 13: richtung = 202.5; break;
       case 14: richtung = 315; break;
-      case 15: richtung = 292.5; break;  
+      case 15: richtung = 292.5; break;
     }
-
-    geschw = 10;
+    geschw = 9;
   }
- // Serial.println(analogRead(IR[8]));
+  else {
+    SEbest = -1;
+    richtung = -1;
+    geschw = 0;
+  }
+  //Serial.println(IR[0]);
   //delay(10);
 }

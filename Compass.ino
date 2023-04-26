@@ -4,8 +4,8 @@ void compass() {
   sensors_event_t angVelocityData;
   gyro.getEvent(&angVelocityData,  Adafruit_BNO055::VECTOR_GYROSCOPE);
   gyro.getEvent(&orientationData,  Adafruit_BNO055::VECTOR_EULER);
-  double winkel = orientationData.orientation.x;
-  double rotationSpeed = angVelocityData.orientation.z;
+  int winkel = orientationData.orientation.x;
+  int rotationSpeed = angVelocityData.orientation.z;
 
   if (digitalRead(K1) == LOW) {
     minus = winkel ;
